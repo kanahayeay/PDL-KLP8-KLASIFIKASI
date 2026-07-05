@@ -1,0 +1,8 @@
+{
+  "MAX_LENGTH": 24,
+  "EMBEDDING_DIM": 100,
+  "HIDDEN_DIM": 128,
+  "NUM_LAYERS": 1,
+  "OUTPUT_DIM": 2,
+  "DROPOUT": 0.3
+}
