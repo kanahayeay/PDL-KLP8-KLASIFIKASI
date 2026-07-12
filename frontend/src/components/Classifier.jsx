@@ -8,14 +8,14 @@ function ProbabilityMeter({ probability, flagged }) {
   const fillColor = flagged ? "bg-rose-500" : "bg-teal-500";
 
   return (
-    <div className="relative h-2.5 w-full rounded-full bg-slate-200">
+    <div className="relative h-2.5 w-full rounded-full bg-indigo-100">
       <div
         className={`h-2.5 rounded-full ${fillColor} transition-all duration-500`}
         style={{ width: `${pct}%` }}
       />
       {/* garis ambang batas 0.5 — inti dari cara model memutuskan label */}
       <div
-        className="absolute top-0 h-2.5 w-px bg-slate-400"
+        className="absolute top-0 h-2.5 w-px bg-indigo-400"
         style={{ left: `${THRESHOLD * 100}%` }}
       />
     </div>
@@ -27,9 +27,9 @@ function LabelResult({ name, result }) {
   const pct = Math.round(result.probability * 100);
 
   return (
-    <div className="space-y-2.5 rounded-lg border border-slate-200 bg-white p-4">
+    <div className="space-y-2.5 rounded-lg border border-indigo-200 bg-white/70 p-4 shadow-sm shadow-indigo-100">
       <div className="flex items-center justify-between">
-        <span className="text-base font-medium text-slate-800">{name}</span>
+        <span className="text-base font-medium text-indigo-950">{name}</span>
         <span
           className={`rounded-full px-2.5 py-1 text-sm font-medium ${
             flagged
@@ -44,8 +44,8 @@ function LabelResult({ name, result }) {
       <ProbabilityMeter probability={result.probability} flagged={flagged} />
 
       <div className="flex items-center justify-between text-sm">
-        <span className="font-mono text-slate-400">threshold 0.50</span>
-        <span className="font-mono text-slate-600">{pct}%</span>
+        <span className="font-mono text-indigo-400">threshold 0.50</span>
+        <span className="font-mono text-indigo-700">{pct}%</span>
       </div>
     </div>
   );
@@ -56,9 +56,9 @@ function HistoryItem({ item, onDelete }) {
   const abFlag = item.result.abusive.label === 1;
 
   return (
-    <div className="flex items-start justify-between gap-3 rounded-lg border border-slate-200 bg-white p-3">
+    <div className="flex items-start justify-between gap-3 rounded-lg border border-indigo-200 bg-white/70 p-3 shadow-sm shadow-indigo-100">
       <div className="min-w-0 flex-1 space-y-1.5">
-        <p className="truncate text-sm text-slate-600">{item.text}</p>
+        <p className="truncate text-sm text-indigo-800">{item.text}</p>
         <div className="flex gap-2">
           <span
             className={`rounded-full px-2 py-0.5 text-xs font-medium ${
@@ -79,7 +79,7 @@ function HistoryItem({ item, onDelete }) {
       <button
         onClick={() => onDelete(item.id)}
         aria-label="Hapus riwayat ini"
-        className="shrink-0 rounded-md px-2 py-1 text-sm text-slate-400 hover:bg-slate-100 hover:text-rose-500"
+        className="shrink-0 rounded-md px-2 py-1 text-sm text-indigo-400 hover:bg-indigo-100 hover:text-rose-500"
       >
         ✕
       </button>
@@ -131,17 +131,17 @@ export default function Classifier() {
   const hasResult = result && !loading;
 
   return (
-    <div className="min-h-screen bg-slate-50 px-4 py-12">
+    <div className="min-h-screen bg-linear-to-br from-indigo-100 via-violet-100 to-sky-100 px-4 py-12">
       <div className="mx-auto w-full max-w-lg space-y-8">
         <div className="space-y-6">
           <div className="space-y-1.5">
-            <p className="font-mono text-xs uppercase tracking-widest text-slate-400">
+            <p className="font-mono text-xs uppercase tracking-widest text-indigo-500">
               Klasifikasi Multi-Label
             </p>
-            <h1 className="text-2xl font-semibold text-slate-900">
+            <h1 className="text-2xl font-semibold text-indigo-950">
               Deteksi Hate Speech &amp; Abusive Language
             </h1>
-            <p className="text-base text-slate-500">
+            <p className="text-base text-indigo-700">
               Analisis teks tweet berbahasa Indonesia menggunakan model
               LSTM dengan GloVe word embedding.
             </p>
@@ -154,14 +154,14 @@ export default function Classifier() {
               placeholder="Tempel atau tulis teks tweet di sini..."
               rows={5}
               disabled={hasResult}
-              className="w-full resize-none rounded-lg border border-slate-300 bg-white p-4 text-base text-slate-900 placeholder-slate-400 outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200 disabled:bg-slate-100 disabled:text-slate-500"
+              className="w-full resize-none rounded-lg border border-indigo-300 bg-white/80 p-4 text-base text-indigo-950 placeholder-indigo-400 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 disabled:bg-indigo-100 disabled:text-indigo-500"
             />
 
             {!hasResult ? (
               <button
                 type="submit"
                 disabled={loading || !text.trim()}
-                className="w-full rounded-lg bg-slate-900 py-3 text-base font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+                className="w-full rounded-lg bg-indigo-600 py-3 text-base font-medium text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-300"
               >
                 {loading ? "Menganalisis..." : "Analisis Teks"}
               </button>
@@ -169,7 +169,7 @@ export default function Classifier() {
               <button
                 type="button"
                 onClick={handleReset}
-                className="w-full rounded-lg border border-slate-300 bg-white py-3 text-base font-medium text-slate-700 transition hover:bg-slate-100"
+                className="w-full rounded-lg border border-indigo-300 bg-white/80 py-3 text-base font-medium text-indigo-700 transition hover:bg-indigo-100"
               >
                 Analisis Ulang
               </button>
@@ -189,12 +189,12 @@ export default function Classifier() {
         {history.length > 0 && (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-medium text-slate-700">
+              <h2 className="text-base font-medium text-indigo-800">
                 Riwayat Analisis
               </h2>
               <button
                 onClick={handleClearHistory}
-                className="text-sm text-slate-400 hover:text-rose-500"
+                className="text-sm text-indigo-400 hover:text-rose-500"
               >
                 Hapus semua
               </button>
@@ -213,4 +213,4 @@ export default function Classifier() {
       </div>
     </div>
   );
-}
+}``
